@@ -1,0 +1,358 @@
+{
+	"id": "556c0f1e-492d-0df4-6b39-b852baf99f7d",
+	"name": "Realestate-api",
+	"description": "",
+	"order": [
+		"ba2c081f-0e4a-3d26-3102-0aa0affce7c4",
+		"af7edece-3794-e659-b81d-cc8ceef2c716",
+		"c126dc56-c26e-7737-25d3-45d614beee89",
+		"46b07f7d-45be-68b3-c813-84d6418a903f",
+		"a45d6024-8819-bdb2-039a-72c21d0326fe",
+		"b2c40790-780d-da80-b346-ca2837297e51",
+		"48b5197c-46d4-7bdc-002b-e7048086d1b9",
+		"eb7bed9e-292f-8d27-0af7-a955c9863137",
+		"809b0177-5f18-3d41-cd52-2beea8f14a38",
+		"cfe101fd-bbe4-1879-3142-cdb858c92ecc",
+		"f4400ef1-c1c2-3c85-dd02-3d5d0de6a9e0"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 0,
+	"owner": 0,
+	"public": false,
+	"requests": [
+		{
+			"id": "46b07f7d-45be-68b3-c813-84d6418a903f",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5000/getBalance",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "556c0f1e-492d-0df4-6b39-b852baf99f7d",
+			"data": [],
+			"dataMode": "raw",
+			"name": "getBalance",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1673947514821,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n\t \"userId\": \"radhaKrishna\"\n}"
+		},
+		{
+			"id": "48b5197c-46d4-7bdc-002b-e7048086d1b9",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5000/queryAllInvestmentByUser",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "556c0f1e-492d-0df4-6b39-b852baf99f7d",
+			"data": [],
+			"dataMode": "raw",
+			"name": "queryAllInvestmentByUser",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1673949548250,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n\t\"userId\":\"radhaKrishna\"\n}"
+		},
+		{
+			"id": "809b0177-5f18-3d41-cd52-2beea8f14a38",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5000/buy",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "556c0f1e-492d-0df4-6b39-b852baf99f7d",
+			"data": [],
+			"dataMode": "raw",
+			"name": "buy",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1674037034927,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\r\n    \"userId\": \"Maa\",\r\n    \"projectId\":\"Project1\",\r\n    \"flatCount\":2,\r\n\t\"price\":4500\r\n}"
+		},
+		{
+			"id": "a45d6024-8819-bdb2-039a-72c21d0326fe",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5000/queryAllProjects",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "556c0f1e-492d-0df4-6b39-b852baf99f7d",
+			"data": [],
+			"dataMode": "raw",
+			"name": "queryAllProjects",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1673948223734,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n\t\"userId\":\"radhaKrishna\"\n}"
+		},
+		{
+			"id": "af7edece-3794-e659-b81d-cc8ceef2c716",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5000/registerUser",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1673947556669,
+			"name": "register user",
+			"description": "",
+			"collectionId": "556c0f1e-492d-0df4-6b39-b852baf99f7d",
+			"responses": [],
+			"rawModeData": "{\r\n    \"userId\": \"appAdmin\",\r\n     \"role\": \"admin\"\r\n} "
+		},
+		{
+			"id": "b2c40790-780d-da80-b346-ca2837297e51",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5000/queryProject",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "556c0f1e-492d-0df4-6b39-b852baf99f7d",
+			"data": [],
+			"dataMode": "raw",
+			"name": "queryProject",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1673948844975,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n\t\"userId\":\"radhaKrishna\",\n\t\"projectId\":\"appAdmin_1673947425931\"\n}"
+		},
+		{
+			"id": "ba2c081f-0e4a-3d26-3102-0aa0affce7c4",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5000/createProject",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1673947522036,
+			"name": "createProject",
+			"description": "",
+			"collectionId": "556c0f1e-492d-0df4-6b39-b852baf99f7d",
+			"responses": [],
+			"rawModeData": "{\r\n    \"userId\": \"appAdmin\",\r\n    \"projectName\":\"asdProject\",\r\n    \"description\": \"sdf Project dec\",\r\n\t\"flatCount\" : 20,\r\n    \"flatPrice\": 100\r\n}"
+		},
+		{
+			"id": "c126dc56-c26e-7737-25d3-45d614beee89",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5000/userLogin",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1673947549267,
+			"name": "Login",
+			"description": "",
+			"collectionId": "556c0f1e-492d-0df4-6b39-b852baf99f7d",
+			"responses": [],
+			"rawModeData": "{\r\n    \"userId\": \"appAdmin\"\r\n}"
+		},
+		{
+			"id": "cfe101fd-bbe4-1879-3142-cdb858c92ecc",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5000/sell",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "556c0f1e-492d-0df4-6b39-b852baf99f7d",
+			"data": [],
+			"dataMode": "raw",
+			"name": "sell",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1674205939101,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\n\t\"userId\":\"Maa\",\n\t\"investmentId\":\"investment_Maa_networkAdmin_1674200988515\"\n}"
+		},
+		{
+			"id": "eb7bed9e-292f-8d27-0af7-a955c9863137",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5000/queryLedger",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1674216712835,
+			"name": "queryLedger",
+			"description": "",
+			"collectionId": "556c0f1e-492d-0df4-6b39-b852baf99f7d",
+			"responses": [],
+			"rawModeData": "{\r\n    \"userId\": \"Maa\"\r\n}"
+		},
+		{
+			"id": "f4400ef1-c1c2-3c85-dd02-3d5d0de6a9e0",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:5000/updateProject",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"preRequestScript": null,
+			"method": "POST",
+			"collectionId": "556c0f1e-492d-0df4-6b39-b852baf99f7d",
+			"data": [],
+			"dataMode": "raw",
+			"name": "updateProject",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1674211456495,
+			"version": 2,
+			"responses": [],
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"rawModeData": "{\r\n    \"userId\": \"networkAdmin\",\r\n    \"projectId\":\"networkAdmin_1674209208437\",\r\n    \"projectName\":\"Alpha Property\",\r\n    \"description\": \"Alpha Property for sell in mumbai\",\r\n\t\"flatCount\" : 3,\r\n    \"flatPrice\": 150\r\n}"
+		}
+	]
+}
