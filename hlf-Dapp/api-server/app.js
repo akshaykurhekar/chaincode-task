@@ -235,36 +235,21 @@ app.post('/getHistoryOfProject', async function (req, res, next){
 });
 
 // event Listener
-app.get('/db/createEvents', async (req, res) => {
+app.get('/db/events', async (req, res) => {
     try {
-        let userId = req.body.userId;
-       // all event from mongodb
-        const result = await event.emitEvent('CreateAssetEvent',userId);
-
-        console.log(" create asset events: ", result);
-     
-        //check response returned by login function and set API response accordingly
-        res.status(200).send(result);
+        
+        Event.find().then((event)=>{
+            console.log(" create asset events: ", event);
+            
+            res.status(200).send(event);
+        })     
+        
     } catch (error) {
       console.error(error);
       res.status(500).send('An error occurred');
     }
   });
 
-  app.get('/db/updateEvents', async (req, res) => {
-    try {
-        let userId = req.body.userId;     
-        
-        const result = await event.emitEvent('UpdateAssetEvent',userId);
-        console.log(" update events: ", result);
-       
-        //check response returned by login function and set API response accordingly
-        res.status(200).send(result);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send('An error occurred');
-    }
-  });  
 
 
 app.use((err, req, res, next) => {

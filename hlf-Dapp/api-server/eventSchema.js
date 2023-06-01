@@ -12,7 +12,8 @@ const eventSchema = new Schema({
       projectId:String,
       projectName:String,  
       flatPrice:String,
-      owner:String,     
+      owner:String,
+      transactionId:String     
   }, required: true },
   transactionId: { type: String, required: true },
   blockNumber: { type: String, required: true },

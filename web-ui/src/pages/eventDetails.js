@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table, Form, Container } from 'react-bootstrap';
 import Navbar from './../components/navbar';
+import axios from 'axios';
 
 const EventDetails = () => {
   const data = [
@@ -29,6 +30,23 @@ const EventDetails = () => {
       email: 'askhaynson@example.com'
     }
   ];
+
+  const [eventList, setEventList] = useState(null);
+
+  const baseURL = "http://localhost:5000/db/events";    
+
+  const getList = async () => {
+
+    await axios.get(baseURL).then((response) => {
+        console.log(response.data);
+        setEventList(response.data);
+    });
+
+}
+
+  useEffect(()=>{
+    getList()
+  }, [])
 
   const [filterValue1, setFilterValue1] = useState('');
 
@@ -65,14 +83,18 @@ const EventDetails = () => {
           <thead>
             <tr>
               <th>Event Name</th>
-              <th>Age</th>
+              <th>Asset</th>
+              <th>Tx.Id</th>
+              <th>Block no. </th>
             </tr>
           </thead>
           <tbody>
             {filteredData.map((item, id) => (
               <tr key={id}>
                 <td>{item.eventName}</td>
-                <td>{item.age}</td>
+                <td>{item.asset}</td>
+                <td>{item.transactionId}</td>
+                <td>{item.blockNumber}</td>
               </tr>
             ))}
           </tbody>
