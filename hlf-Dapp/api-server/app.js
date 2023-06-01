@@ -3,14 +3,23 @@
 const express = require('express');
 const helper = require('./helper');
 const invoke = require('./invoke');
+const event = require('./event');
 const query = require('./query');
 const cors = require('cors');
+const mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/mydatabase', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+
 let server = app.listen(5000, function () {
     console.log('Node server is running on 5000 port :) ');
+   
 });
 
 
@@ -86,7 +95,10 @@ app.post('/createProject', async function (req, res, next){
         const result = await invoke.invokeTransaction('createProject',{projectId:projectId, project:project, owner:userId},userId);
         // const result = await helper.createProject(projectId, projectName, description, flatCount, flatPrice);
         console.log("create Asset status: ", result);
-        //check response returned by login function and set API response accordingly
+
+        const result2 = await event.emitEvent(userId);
+        console.log(" create asset events: ", result2);
+        
         res.status(200).send(result);
 
     } catch (error) {       
@@ -99,7 +111,7 @@ app.post('/updateProject', async function (req, res, next){
         //  updateProject(ctx, oldProjectId, projectName, description, flatCount, flatPrice)
       
         let userId = req.body.userId;
-        let projectId = req.body.projectId; 
+        let assetId = req.body.projectId; 
         const project = {    
             assetType:'project',           
             projectName:req.body.projectName,
@@ -109,10 +121,15 @@ app.post('/updateProject', async function (req, res, next){
             timestamp: req.body.timestamp
         }
 
-       const result = await invoke.invokeTransaction('updateProject',{projectId:projectId, project:project},userId);
+       const result = await invoke.invokeTransaction('updateProject',{projectId:assetId, project:project},userId);
         // const result = await helper.updateProject(projectId, projectName, description, flatCount, flatPrice);
         console.log("update Asset status: ", result);
         //check response returned by login function and set API response accordingly
+
+
+        const result2 = await event.emitEvent(userId);
+        console.log(" create asset events: ", result2);
+        
         res.status(200).send(result);
 
     } catch (error) {       
@@ -126,7 +143,7 @@ app.post('/deleteProject', async function (req, res, next){
         let userId = req.body.userId;
         let projectId = req.body.projectId;         
 
-       const result = await invoke.invokeTransaction('deleteProject',{assetId:projectId},userId);
+       const result = await invoke.invokeTransaction('deleteProject',{assetId:projectId, owner:userId},userId);
        
         console.log(" Asset status: ", result);
         //check response returned by login function and set API response accordingly
@@ -137,7 +154,7 @@ app.post('/deleteProject', async function (req, res, next){
     }
 });
 
-app.post('/queryProject', async function (req, res, next){
+app.post('/queryAssetById', async function (req, res, next){
     try {
         //  queryAssetById(ctx, projectId)
         let userId = req.body.userId;
@@ -153,12 +170,12 @@ app.post('/queryProject', async function (req, res, next){
 });
 
 
-app.post('/queryAllProjects', async function (req, res, next){
+app.post('/queryAllProjectByOwner', async function (req, res, next){
     try {
         // queryAllProjects(ctx)
         let userId = req.body.userId;        
         // const result = await helper.queryAllProjects();
-        const result = await query.getQuery('queryAllProjects',{}, userId);
+        const result = await query.getQuery('queryAllProjectByOwner',{}, userId);
 
         console.log("Asset data: ", result);
         //check response returned by login function and set API response accordingly
@@ -176,7 +193,7 @@ app.post('/queryAllProjects', async function (req, res, next){
 });
 
 // query Ledger
-app.post('/queryLedger', async function (req, res, next){
+app.post('/queryAllAssets', async function (req, res, next){
     try {
         // queryAllAssets(ctx)
         let userId = req.body.userId;  
@@ -196,6 +213,63 @@ app.post('/queryLedger', async function (req, res, next){
         next(error);
     }
 });
+
+// query History of Product
+app.post('/getHistoryOfProject', async function (req, res, next){
+    try {
+        // getHistoryOfProject(ctx, projectId)
+        let userId = req.body.userId;  
+        let projectId = req.body.projectId;  
+
+        const result = await query.getQuery('getHistoryOfProject',{projectId:projectId}, userId);
+
+        console.log("Asset History: ", result);
+        //check response returned by login function and set API response accordingly
+        if(result.status){
+
+            res.status(200).send(JSON.parse(result.assets));
+        }else{
+            res.status(200).send(JSON.parse(result.error));
+
+        }
+
+    } catch (error) {       
+        next(error);
+    }
+});
+
+// event Listener
+app.post('/createEvents', async (req, res) => {
+    try {
+        let userId = req.body.userId;
+       
+        const result = await event.emitEvent('CreateAssetEvent',userId);
+
+        console.log(" create asset events: ", result);
+     
+        //check response returned by login function and set API response accordingly
+        res.status(200).send(result);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('An error occurred');
+    }
+  });
+
+  app.post('/updateEvents', async (req, res) => {
+    try {
+        let userId = req.body.userId;     
+        
+        const result = await event.emitEvent('UpdateAssetEvent',userId);
+        console.log(" update events: ", result);
+       
+        //check response returned by login function and set API response accordingly
+        res.status(200).send(result);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('An error occurred');
+    }
+  });  
+
 
 app.use((err, req, res, next) => {
     res.status(400).send(err.message);

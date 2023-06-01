@@ -9,7 +9,7 @@ const invokeTransaction = async (fcn, args, userID) => {
 
     const orgID = 'Org1';
     const channelName = 'mychannel';
-const chaincodeName = 'chaincode2';
+const chaincodeName = 'chaincode7';
 
     const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', `${orgID}.example.com`.toLowerCase(), `connection-${orgID}.json`.toLowerCase());
     const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
