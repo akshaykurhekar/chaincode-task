@@ -2,6 +2,8 @@
 
 const fs = require('fs');
 const path = require('path');
+const mongoose = require('mongoose');
+const Event = require('./eventSchema');
 const { Wallets, Gateway } = require('fabric-network');
 
 
@@ -40,23 +42,7 @@ const emitEvent = async (userID) => {
     // Get the contract from the network.
     const contract = network.getContract(chaincodeName);
     
-    function showTransactionData(transactionData) {
-        console.log(JSON.stringify(transactionData))
-        const creator = transactionData.actions[0].header.creator;
-        console.log(`    - submitted by: ${creator.mspid}-${creator.id_bytes.toString('hex')}`);
-        for (const endorsement of transactionData.actions[0].payload.action.endorsements) {
-            console.log(`    - endorsed by: ${endorsement.endorser.mspid}-${endorsement.endorser.id_bytes.toString('hex')}`);
-        }
-        const chaincode = transactionData.actions[0].payload.chaincode_proposal_payload.input.chaincode_spec;
-        console.log(`    - chaincode:${chaincode.chaincode_id.name}`);
-        console.log(`    - function:${chaincode.input.args[0].toString()}`);
-        for (let x = 1; x < chaincode.input.args.length; x++) {
-            console.log(`    - arg:${chaincode.input.args[x].toString()}`);
-        }
-    }
-
-
-   const contractListener = async (event) => {
+    const contractListener = async (event) => {
         console.log("==========================================")
         console.log(event)
         // The payload of the chaincode event is the value place there by the
@@ -65,8 +51,7 @@ const emitEvent = async (userID) => {
         // In this case we know that the chaincode will always place the asset
         // being worked with as the payload for all events produced.
         const asset = JSON.parse(event.payload.toString());
-        
-      
+           
 
         console.log(`<-- Contract Event Received: ${event.eventName} - ${JSON.stringify(asset)}`);
         // console.log(`<-- Contract Event Received: ${event.eventName} - ${asset}`);
@@ -89,6 +74,19 @@ const emitEvent = async (userID) => {
         }
 
         // store this obj in mongoDB 
+
+        const newEvent = new Event({
+            eventName:event.eventName,
+            asset: asset,
+            transactionId:eventTransaction.transactionId,
+            blockNumber:eventBlock.blockNumber.toString()
+        });
+
+        newEvent.save().then((res)=>{
+            console.log(res, );
+        }).catch((e) => {
+            console.log(e);
+        })
 
         // return result;
     };

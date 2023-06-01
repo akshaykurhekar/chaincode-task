@@ -6,12 +6,8 @@ const invoke = require('./invoke');
 const event = require('./event');
 const query = require('./query');
 const cors = require('cors');
-const mongoose = require('mongoose');
-
-mongoose.connect('mongodb://localhost/mydatabase', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+const Event = require('./eventSchema');
+const connect = require('./db.js');
 
 const app = express();
 app.use(express.json());
@@ -19,7 +15,7 @@ app.use(cors());
 
 let server = app.listen(5000, function () {
     console.log('Node server is running on 5000 port :) ');
-   
+   connect();
 });
 
 
@@ -239,10 +235,10 @@ app.post('/getHistoryOfProject', async function (req, res, next){
 });
 
 // event Listener
-app.post('/createEvents', async (req, res) => {
+app.get('/db/createEvents', async (req, res) => {
     try {
         let userId = req.body.userId;
-       
+       // all event from mongodb
         const result = await event.emitEvent('CreateAssetEvent',userId);
 
         console.log(" create asset events: ", result);
@@ -255,7 +251,7 @@ app.post('/createEvents', async (req, res) => {
     }
   });
 
-  app.post('/updateEvents', async (req, res) => {
+  app.get('/db/updateEvents', async (req, res) => {
     try {
         let userId = req.body.userId;     
         
