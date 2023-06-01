@@ -73,11 +73,13 @@ const emitEvent = async (userID) => {
             blockNumber:eventBlock.blockNumber.toString()
         }
 
+        console.log("Event ready to DB => ", objForDb)
         // store this obj in mongoDB 
 
         const newEvent = new Event({
             eventName:event.eventName,
-            asset: asset,
+            userName:asset.userName,
+            assetData: asset.assetData,
             transactionId:eventTransaction.transactionId,
             blockNumber:eventBlock.blockNumber.toString()
         });
@@ -107,9 +109,7 @@ const emitEvent = async (userID) => {
         // contract.removeContractListener(listener);
        
     // Disconnect from the gateway.
-    await gateway.disconnect();
-            
-  
+    await gateway.disconnect();              
 
 }
 

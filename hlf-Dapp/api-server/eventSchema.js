@@ -6,15 +6,15 @@ const Schema = mongoose.Schema;
 // create a schema
 const eventSchema = new Schema({
   eventName: { type: String, required: true },
-  userName: { type: String, required: true, unique: true },
-  asset: { type: {
+  userName: { type: String, },
+  assetData: { type: {
       assetType:String,
-      projectId:String,
-      projectName:String,  
+      projectName:String, 
+      description:String, 
       flatPrice:String,
-      owner:String,
-      transactionId:String     
-  }, required: true },
+      owner:String,      
+      timestamp:Number     
+  }},
   transactionId: { type: String, required: true },
   blockNumber: { type: String, required: true },
   
