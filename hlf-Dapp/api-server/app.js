@@ -234,6 +234,31 @@ app.post('/getHistoryOfProject', async function (req, res, next){
     }
 });
 
+//async getAssetsWithPagination(ctx, pageSize, bookmark)
+app.post('/getAssetsWithPagination', async function (req, res, next){
+    try {
+        
+        let userId = req.body.userId;  
+        let pageSize = req.body.pageSize;  
+        let bookmark = req.body.bookmark;  
+
+        const result = await query.getQuery('getAssetsWithPagination',{pageSize:pageSize, bookmark:bookmark}, userId);
+
+        console.log("Asset History: ", result);
+        //check response returned by login function and set API response accordingly
+        if(result.status){
+
+            res.status(200).send(JSON.parse(result.assets));
+        }else{
+            res.status(200).send(JSON.parse(result.error));
+
+        }
+
+    } catch (error) {       
+        next(error);
+    }
+});
+
 // event Listener
 app.get('/db/events', async (req, res) => {
     try {
