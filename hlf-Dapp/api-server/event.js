@@ -65,15 +65,20 @@ const emitEvent = async (userID) => {
         const eventBlock = eventTransaction.getBlockEvent();
         console.log(`*** block: ${eventBlock.blockNumber.toString()}`);
 
-
+        
+        
         const objForDb = {
             eventName:event.eventName,
             asset: asset,
             transactionId:eventTransaction.transactionId,
             blockNumber:eventBlock.blockNumber.toString()
         }
+        
+        // -------Event backup in eventLog file
+        // const data = { key1: 'value1', key2: 'value2' }; // Replace with your data in JSON format
+        // fs.appendFileSync('/eventLog.txt', JSON.stringify(objForDb) + '\n');
 
-        console.log("Event ready to DB => ", objForDb)
+        // console.log("Event ready to DB => ", objForDb)
         // store this obj in mongoDB 
 
         const newEvent = new Event({
