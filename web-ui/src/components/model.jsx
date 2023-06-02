@@ -51,7 +51,7 @@ const Model = (props)=>{
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Add Car</Modal.Title>
+          <Modal.Title>Add Project</Modal.Title>
         </Modal.Header>
         <Modal.Body>
            <input type="text" placeholder='Project name ' onChange={ (e)=> setProjectName(e.target.value)}></input>

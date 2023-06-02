@@ -205,6 +205,7 @@ class DltContract extends Contract {
     async getHistoryOfProject(ctx, args) {
        
         args = JSON.parse(args);
+        const allResults=[];
 
         for await (const {key, value} of ctx.stub.getHistoryForKey(args['projectId'])) {
             const strValue = Buffer.from(value).toString('utf8');
@@ -221,7 +222,7 @@ class DltContract extends Contract {
         
         if (!allResults || allResults.length === 0)
             {
-                return {status:false, error: `${projectId} does not exist`};
+                return {status:false, error: `${args['projectId']} does not exist`};
             } else {
                 return {status:true, assets:JSON.stringify(allResults)};
             }

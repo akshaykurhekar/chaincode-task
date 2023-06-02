@@ -4,34 +4,8 @@ import Navbar from './../components/navbar';
 import axios from 'axios';
 
 const EventDetails = () => {
-  const data = [
-    {
-      id: 1,
-      eventName: 'CreateAsset',
-      age: 25,
-      email: 'johndoe@example.com'
-    },
-    {
-      id: 2,
-      eventName: 'CreateAsset',
-      age: 30,
-      email: 'janesmith@example.com'
-    },
-    {
-      id: 3,
-      eventName: 'UpdateAsset',
-      age: 28,
-      email: 'alicejohnson@example.com'
-    },
-    {
-      id: 4,
-      eventName: 'UpdateAsset',
-      age: 24,
-      email: 'askhaynson@example.com'
-    }
-  ];
-
-  const [eventList, setEventList] = useState(null);
+  
+  const [eventList, setEventList] = useState([]);
 
   const baseURL = "http://localhost:5000/db/events";    
 
@@ -54,7 +28,7 @@ const EventDetails = () => {
     setFilterValue1(e.target.value);
   };
 
-  const filteredData = data.filter((item) =>
+  const filteredData = eventList && eventList.filter((item) =>
     item.eventName.toLowerCase().includes(filterValue1.toLowerCase())
   );
 
@@ -83,7 +57,7 @@ const EventDetails = () => {
           <thead>
             <tr>
               <th>Event Name</th>
-              <th>Asset</th>
+              <th>Asset Details</th>
               <th>Tx.Id</th>
               <th>Block no. </th>
             </tr>
@@ -92,8 +66,25 @@ const EventDetails = () => {
             {filteredData.map((item, id) => (
               <tr key={id}>
                 <td>{item.eventName}</td>
-                <td>{item.asset}</td>
-                <td>{item.transactionId}</td>
+                <td> 
+                {Array.isArray(item.assetData) ? (
+          item.assetData.map((asset) => {
+            const obj = {
+              name: asset.projectName,
+              timestamp: asset.timestamp
+            };
+            return obj;
+          })
+        ) : (
+          <>
+            <div style={{color:"green"}}><span style={{color:"black"}}>ProjectName:</span> {item.assetData.projectName}</div>
+            <div style={{color:"green"}}><span style={{color:"black"}}>Owner:</span> {item.assetData.owner}</div>
+            <div style={{color:"green"}}><span style={{color:"black"}}>Timestamp:</span> {item.assetData.timestamp}</div>
+            {/* Display other properties of item.assetData if needed */}
+          </>
+        )}
+        </td>
+        <td>{item.transactionId.substring(0, 4)}...{item.transactionId.substring(item.transactionId.length - 4)}</td>
                 <td>{item.blockNumber}</td>
               </tr>
             ))}

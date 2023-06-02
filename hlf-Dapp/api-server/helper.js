@@ -6,7 +6,7 @@ const FabricCAServices = require('fabric-ca-client');
 const { Wallets, Gateway } = require('fabric-network');
 
 const channelName = 'mychannel';
-const chaincodeName = 'chaincode7';
+const chaincodeName = 'chaincode10';
 
 
 const registerUser = async (userID, userRole) => {

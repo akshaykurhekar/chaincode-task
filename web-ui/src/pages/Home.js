@@ -9,18 +9,18 @@ import axios from "axios";
 
 const Home = () => {
   const [projectList, setProjectList] = useState([]);
+  const [data, setData] = useState(null);
 
-  const baseURL = "http://localhost:5000/queryAllProjectByOwner";
+  const baseURL = "http://localhost:5000";
 
   const projectData = async () => {
     
-    const temp = await axios.post(`${baseURL}`,{userId:userId}).then((response) => {
+    const temp = await axios.post(`${baseURL}/queryAllProjectByOwner`,{userId:userId}).then((response) => {
         console.log(response.data)
         return response.data;
     });
 
-    setProjectList(temp);
-  
+    setProjectList(temp);  
   };
 
   useEffect(() => {
@@ -29,20 +29,27 @@ const Home = () => {
 
 const userId = localStorage.getItem('user');
 
-const updateAsset = (id) =>{
+const updateAsset = (id, asset) =>{
     console.log("update asset:",id);
 
-    return (<UpdateModel />)  
-
+    return (<UpdateModel projectId={id} asset={asset} projectData={projectData}/>)  
 }
 
 const viewHistory = (id) =>{
-    console.log("view history:",id);
-    return (<ViewModel />)  
+     
+    return (<ViewModel projectId={id} userId={userId} />)  
 }
 
-const deleteAsset = (id) =>{
-    console.log("deleteAsset:",id);
+const deleteAsset = async (id) =>{
+    
+    await axios.post("http://localhost:5000/deleteProject",{userId:userId, projectId:id}).then((response) => {
+        console.log(response)
+        console.log("deleteAsset:",id);
+        if(response.status === 200){
+            projectData();
+        }
+    });
+
 }
 
 
@@ -91,25 +98,24 @@ const deleteAsset = (id) =>{
         </tr>
       </thead>
       <tbody>
-      <tr key={1}>
-          <td>{"test"}</td>
-          <td>{"test"}</td>
-          <td>{"test"}</td>
-          <td> { updateAsset("assetId") } </td>
-          <td> { viewHistory( "assetId") }  </td>
-          <td> <Button variant="danger" onClick={ () => deleteAsset("assetId")}>Delete</Button> </td>
-        </tr>
-        {projectList.map((item, id) => {
+          {projectList.map((item, id) => {
             var assetId = item.assetId;
+            var obj = {projectName:item.record.projectName,
+                description:item.record.description,
+                flatPrice:item.record.flatPrice,
+                timestamp:item.record.timestamp
+            }
+
             return (
-        <tr key={id}>
-          <td>{item.record.projectName}</td>
-          <td>{item.record.description}</td>
-          <td>{item.record.flatPrice}</td>
-          <td> { updateAsset(assetId) } </td>
-          <td> <Button variant="success" onClick={ () => viewHistory(assetId)}>View</Button>  </td>
-          <td> <Button variant="danger" onClick={ () => deleteAsset(assetId)}>Delete</Button> </td>
-        </tr>
+            <tr key={id}>
+                <td>{item.record.projectName}</td>
+                <td>{item.record.description}</td>
+                <td>{item.record.flatPrice}</td>
+                {/* <td> { () => updateAsset(assetId, obj) } </td> */}
+                <td> {  updateAsset(assetId, obj) } </td>
+                <td> {  viewHistory(assetId) }  </td>
+                <td> <Button variant="danger" onClick={ ()=> deleteAsset(assetId)}>Delete</Button> </td>
+            </tr>
             )
         })}
       </tbody>
