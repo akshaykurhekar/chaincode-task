@@ -12,7 +12,7 @@ const EventDetails = () => {
   const getList = async () => {
 
     await axios.get(baseURL).then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         setEventList(response.data);
     });
 

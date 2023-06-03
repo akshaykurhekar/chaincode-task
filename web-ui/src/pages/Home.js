@@ -9,7 +9,7 @@ import axios from "axios";
 
 const Home = () => {
   const [projectList, setProjectList] = useState([]);
-  const [data, setData] = useState(null);
+//   const [data, setData] = useState(null);
 
   const baseURL = "http://localhost:5000";
 

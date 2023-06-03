@@ -12,7 +12,7 @@ const emitEvent = async (userID) => {
     // const userID="admin";
     const orgID = 'Org1';
     const channelName = 'mychannel';
-    const chaincodeName = 'chaincode10';
+    const chaincodeName = 'chaincode11';
 
     const ccpPath = path.resolve(__dirname, '..', '..', 'test-network', 'organizations', 'peerOrganizations', `${orgID}.example.com`.toLowerCase(), `connection-${orgID}.json`.toLowerCase());
     const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));

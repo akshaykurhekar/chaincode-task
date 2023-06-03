@@ -5,9 +5,9 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import EventDetails from "./pages/eventDetails.js"
+import PaginationTable from "./pages/paginationTable";
 
-
-import './App.css';
+// import './App.css';
 
 function App() {
   return (
@@ -16,7 +16,8 @@ function App() {
         <Route exact path="/" element={<Login/>} />
         <Route exact path="/register" element={<Register/>} />
         <Route exact path="/Home" element={<Home/>} />
-        <Route path="/events" element={<EventDetails/>} />
+        <Route exact path="/events" element={<EventDetails/>} />
+        <Route exact path="/projects" element={<PaginationTable/>} />
       </Routes>
     
    </>

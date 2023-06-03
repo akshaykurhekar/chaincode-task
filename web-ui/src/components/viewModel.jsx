@@ -37,13 +37,33 @@ const ViewModel = (props)=>{
         </Modal.Header>
         <Modal.Body >
             {data && data.map((item, index) => (
-                <div key={index} style={{border:"2px solid black", padding:"5px", margin:"2px"}}>
-                    <p>Asset Type: {item.Record.assetType}</p>
-                    <p>Description: {item.Record.description}</p>
-                    <p>Flat Price: {item.Record.flatPrice}</p>
-                    <p>Owner: {item.Record.owner}</p>
-                    <p>Project Name: {item.Record.projectName}</p>
-                 </div>
+               <div
+               key={index}
+               style={{
+                 border: "2px solid black",
+                 padding: "5px",
+                 margin: "2px",
+                 backgroundColor: "lightgreen", // Set desired background color
+                 color: "black", // Set desired text color
+               }}
+             >
+               <div style={{ marginBottom: "5px" }}>
+                 <strong>Asset Type:</strong> {item.Record.assetType}
+               </div>
+               <div>
+                 <strong>Project Name:</strong> {item.Record.projectName}
+               </div>
+               <div style={{ marginBottom: "5px" }}>
+                 <strong>Description:</strong> {item.Record.description}
+               </div>
+               <div style={{ marginBottom: "5px" }}>
+                 <strong>Flat Price:</strong> {item.Record.flatPrice}
+               </div>
+               <div style={{ marginBottom: "5px" }}>
+                 <strong>Owner:</strong> {item.Record.owner}
+               </div>
+             </div>
+             
            ))}
             </Modal.Body>
         <Modal.Footer>
