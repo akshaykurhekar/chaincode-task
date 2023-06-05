@@ -76,7 +76,10 @@ const emitEvent = async (userID) => {
         
         // -------Event backup in eventLog file
         // const data = { key1: 'value1', key2: 'value2' }; // Replace with your data in JSON format
-        // fs.appendFileSync('/eventLog.txt', JSON.stringify(objForDb) + '\n');
+        const eventLogPath = path.resolve(__dirname,'eventLog.json');
+        // create file
+        // add lgs to file
+        fs.appendFileSync(eventLogPath, JSON.stringify(objForDb) + '\n');
 
         // console.log("Event ready to DB => ", objForDb)
         // store this obj in mongoDB 

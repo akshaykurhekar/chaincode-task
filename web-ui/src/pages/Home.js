@@ -8,26 +8,27 @@ import axios from "axios";
 
 
 const Home = () => {
-  const [projectList, setProjectList] = useState([]);
+  const [projectList, setProjectList] = useState(null);
 //   const [data, setData] = useState(null);
 
   const baseURL = "http://localhost:5000";
+  const userId = localStorage.getItem('user');
 
   const projectData = async () => {
     
-    const temp = await axios.post(`${baseURL}/queryAllProjectByOwner`,{userId:userId}).then((response) => {
-        console.log(response.data)
-        return response.data;
+    await axios.post(`http://localhost:5000/queryAllProjectByOwner`, {userId:userId}).then((response) => {
+        console.log(response.data);
+        setProjectList(response.data);   
+    }).catch((err)=>{
+        console.log(err);
     });
 
-    setProjectList(temp);  
   };
 
   useEffect(() => {
     projectData();
   },[]);
 
-const userId = localStorage.getItem('user');
 
 const updateAsset = (id, asset) =>{
     console.log("update asset:",id);
@@ -98,7 +99,7 @@ const deleteAsset = async (id) =>{
         </tr>
       </thead>
       <tbody>
-          {projectList.map((item, id) => {
+          {projectList && projectList.map((item, id) => {
             var assetId = item.assetId;
             var obj = {projectName:item.record.projectName,
                 description:item.record.description,
